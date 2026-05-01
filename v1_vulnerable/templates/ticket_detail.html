@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Ticket #{{ ticket.id }} – AuthX v1{% endblock %}
+{% block content %}
+<h2>Ticket #{{ ticket.id }} (v1 – vulnerabil)</h2>
+<p style="color:#c00;"><strong>Atentie:</strong> aceasta pagina nu verifica daca ticketul apartine userului curent (IDOR).</p>
+<table border="1" cellpadding="6" cellspacing="0" style="width:100%;border-collapse:collapse;">
+    <tr><th>Camp</th><th>Valoare</th></tr>
+    <tr><td>ID</td><td>{{ ticket.id }}</td></tr>
+    <tr><td>Titlu</td><td>{{ ticket.title }}</td></tr>
+    <tr><td>Descriere</td><td>{{ ticket.description }}</td></tr>
+    <tr><td>Severitate</td><td>{{ ticket.severity.value }}</td></tr>
+    <tr><td>Status</td><td>{{ ticket.status.value }}</td></tr>
+    <tr><td>owner_id</td><td>{{ ticket.owner_id }}</td></tr>
+    <tr><td>Creat la</td><td>{{ ticket.created_at }}</td></tr>
+</table>
+<br>
+<a href="{{ url_for('tickets') }}" class="btn">Inapoi la lista</a>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Tickete – AuthX v1{% endblock %}
+{% block content %}
+<h2>Tickete (v1 – vulnerabil)</h2>
+<p style="color:#c00;"><strong>Atentie:</strong> aceasta versiune afiseaza TOATE ticketele din sistem, inclusiv ale altor utilizatori (IDOR).</p>
+{% if tickets %}
+    <table border="1" cellpadding="6" cellspacing="0" style="width:100%;border-collapse:collapse;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titlu</th>
+                <th>Severitate</th>
+                <th>Status</th>
+                <th>Proprietar (owner_id)</th>
+                <th>Actiuni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in tickets %}
+            <tr>
+                <td>{{ t.id }}</td>
+                <td>{{ t.title }}</td>
+                <td>{{ t.severity.value }}</td>
+                <td>{{ t.status.value }}</td>
+                <td>{{ t.owner_id }}</td>
+                <td><a href="{{ url_for('ticket_detail', ticket_id=t.id) }}">Vezi</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Nu exista tickete in sistem. Ruleaza seed_test_users.py.</p>
+{% endif %}
+<br>
+<a href="{{ url_for('index') }}" class="btn">Inapoi la Dashboard</a>
+{% endblock %}
